@@ -23,31 +23,53 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3wf-8h-Skp">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="3wf-8h-Skp" secondAttribute="height" multiplier="16:9" priority="900" id="Eou-Wo-W75"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J48-qg-hXd" customClass="WaveformImageView" customModule="DSWaveformImage">
-                                        <rect key="frame" x="0.0" y="189.5" width="320" height="189"/>
+                                        <rect key="frame" x="0.0" y="142" width="320" height="142"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="J48-qg-hXd" secondAttribute="height" multiplier="16:9" priority="900" id="t5F-rm-fdn"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQM-Ik-oVa">
-                                        <rect key="frame" x="0.0" y="378.5" width="320" height="189.5"/>
+                                        <rect key="frame" x="0.0" y="284" width="320" height="142"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="aQM-Ik-oVa" secondAttribute="height" multiplier="16:9" priority="900" id="Exg-81-t2N"/>
                                         </constraints>
                                     </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dm9-jA-r9E">
+                                        <rect key="frame" x="0.0" y="426" width="320" height="142"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSv-KZ-c7c">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" priority="250" constant="320" id="hdI-Iz-wq1"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="142" placeholder="YES" id="sSQ-au-Vsr"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="YSv-KZ-c7c" secondAttribute="bottom" id="VlF-ds-fOY"/>
+                                            <constraint firstItem="YSv-KZ-c7c" firstAttribute="top" secondItem="dm9-jA-r9E" secondAttribute="top" id="bDH-RN-sY4"/>
+                                            <constraint firstItem="YSv-KZ-c7c" firstAttribute="leading" secondItem="dm9-jA-r9E" secondAttribute="leading" id="ocz-j0-Yao"/>
+                                            <constraint firstAttribute="trailing" secondItem="YSv-KZ-c7c" secondAttribute="trailing" id="ukB-d3-meY"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dm9-jA-r9E" secondAttribute="trailing" id="AF0-8M-d5u"/>
                                     <constraint firstItem="aQM-Ik-oVa" firstAttribute="leading" secondItem="w9S-UI-8uW" secondAttribute="leading" id="Cmd-wL-qej"/>
                                     <constraint firstAttribute="trailing" secondItem="3wf-8h-Skp" secondAttribute="trailing" id="KFG-p3-CgC"/>
+                                    <constraint firstItem="dm9-jA-r9E" firstAttribute="top" secondItem="aQM-Ik-oVa" secondAttribute="bottom" id="Kq8-EC-PVg"/>
                                     <constraint firstAttribute="trailing" secondItem="J48-qg-hXd" secondAttribute="trailing" id="UiG-kY-hqs"/>
                                     <constraint firstItem="J48-qg-hXd" firstAttribute="leading" secondItem="w9S-UI-8uW" secondAttribute="leading" id="Vov-c9-DGA"/>
+                                    <constraint firstItem="dm9-jA-r9E" firstAttribute="leading" secondItem="w9S-UI-8uW" secondAttribute="leading" id="WS8-YJ-s3n"/>
                                     <constraint firstAttribute="trailing" secondItem="aQM-Ik-oVa" secondAttribute="trailing" id="hUn-Ry-snr"/>
                                     <constraint firstItem="3wf-8h-Skp" firstAttribute="leading" secondItem="w9S-UI-8uW" secondAttribute="leading" id="kSa-YC-z5V"/>
+                                    <constraint firstAttribute="bottom" secondItem="dm9-jA-r9E" secondAttribute="bottom" id="mcH-tv-eFb"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -62,12 +84,14 @@
                     <connections>
                         <outlet property="bottomWaveformView" destination="aQM-Ik-oVa" id="iev-uC-R8S"/>
                         <outlet property="middleWaveformView" destination="J48-qg-hXd" id="zoE-RX-g3F"/>
+                        <outlet property="scrollWaveformView" destination="dm9-jA-r9E" id="M5D-4L-eym"/>
+                        <outlet property="scrollWaveformViewContainer" destination="YSv-KZ-c7c" id="FFi-FC-eTe"/>
                         <outlet property="topWaveformView" destination="3wf-8h-Skp" id="PwX-zb-tPA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="138.98050974512745"/>
+            <point key="canvasLocation" x="138.75" y="138.38028169014083"/>
         </scene>
     </scenes>
 </document>
