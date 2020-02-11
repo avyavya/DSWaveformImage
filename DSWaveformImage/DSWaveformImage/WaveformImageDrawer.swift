@@ -13,20 +13,11 @@ public class WaveformImageDrawer {
                               with configuration: WaveformConfiguration,
                               qos: DispatchQoS.QoSClass = .userInitiated,
                               completionHandler: @escaping (_ waveformImage: UIImage?) -> ()) {
-        let scaledSize = CGSize(width: configuration.size.width * configuration.scale,
-                                height: configuration.size.height * configuration.scale)
-        let scaledConfiguration = WaveformConfiguration(size: scaledSize,
-                                                        color: configuration.color,
-                                                        backgroundColor: configuration.backgroundColor,
-                                                        style: configuration.style,
-                                                        position: configuration.position,
-                                                        scale: configuration.scale,
-                                                        paddingFactor: configuration.paddingFactor)
         guard let waveformAnalyzer = WaveformAnalyzer(audioAssetURL: audioAssetURL) else {
             completionHandler(nil)
             return
         }
-        render(from: waveformAnalyzer, with: scaledConfiguration, qos: qos, completionHandler: completionHandler)
+        render(from: waveformAnalyzer, with: configuration, qos: qos, completionHandler: completionHandler)
     }
 
     /// Renders a UIImage of the waveform data calculated by the analyzer.
