@@ -64,10 +64,8 @@ private extension WaveformImageDrawer {
 
             let samplesPerPart = Int(ceil(CGFloat(samples.count) / partCount))
             var partSize = CGSize(width: maxWidthPerImage, height: configuration.size.height)
-            print("width: \(configuration.size.width), samples: \(samples.count), samplesPerPart: \(samplesPerPart), partCount: \(partCount)")
 
-            (0...Int(partCount)).forEach {
-                print("pos: \(maxWidthPerImage * CGFloat($0 + 1)) last samples: \(samples.count)")
+            (0...Int(partCount)).forEach { _ in
                 if samplesPerPart > samples.count {
                     partSize.width = configuration.size.width.truncatingRemainder(dividingBy: maxWidthPerImage)
                 }
