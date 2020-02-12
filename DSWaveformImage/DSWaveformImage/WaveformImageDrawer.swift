@@ -49,11 +49,40 @@ private extension WaveformImageDrawer {
                 completionHandler: @escaping (_ waveformImage: UIImage?) -> ()) {
         let sampleCount = Int(configuration.size.width * configuration.scale)
         waveformAnalyzer.samples(count: sampleCount, qos: qos) { samples in
-            guard let samples = samples else {
+            guard var samples = samples else {
                 completionHandler(nil)
                 return
             }
-            completionHandler(self.graphImage(from: samples, with: configuration))
+
+            let maxWidthPerImage: CGFloat = 5460 // seems limitation max 16383px / scale for UIGraphicsBeginImageContextWithOptions
+            let partCount = configuration.size.width / maxWidthPerImage
+
+            if partCount < 1 {
+                completionHandler(self.graphImage(from: samples, with: configuration))
+                return
+            }
+
+            let samplesPerPart = Int(ceil(CGFloat(samples.count) / partCount))
+            var partSize = CGSize(width: maxWidthPerImage, height: configuration.size.height)
+            print("width: \(configuration.size.width), samples: \(samples.count), samplesPerPart: \(samplesPerPart), partCount: \(partCount)")
+
+            (0...Int(partCount)).forEach {
+                print("pos: \(maxWidthPerImage * CGFloat($0 + 1)) last samples: \(samples.count)")
+                if samplesPerPart > samples.count {
+                    partSize.width = configuration.size.width.truncatingRemainder(dividingBy: maxWidthPerImage)
+                }
+
+                let part = samples.prefix(samplesPerPart).map { $0 }
+                samples = samples.dropFirst(samplesPerPart).map { $0 }
+                let partConfig = WaveformConfiguration(size: partSize,
+                                                       color: configuration.color,
+                                                       backgroundColor: configuration.backgroundColor,
+                                                       style: configuration.style,
+                                                       position: configuration.position,
+                                                       scale: configuration.scale,
+                                                       paddingFactor: configuration.paddingFactor)
+                completionHandler(self.graphImage(from: part, with: partConfig))
+            }
         }
     }
 
